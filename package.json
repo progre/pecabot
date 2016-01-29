@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "progre",
   "bugs": "https://github.com/progre/template-typescript/issues",
+  "dependencies": {
+    "node-gitter": "^1.2.9"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
