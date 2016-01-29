@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "noEmitOnError": true,
+        "target": "es6"
+    },
+    "files": [
+        "src/index.ts",
+        "src/public/js/app.ts"
+    ]
+}
