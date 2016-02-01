@@ -2,17 +2,17 @@
 const Gitter = require("node-gitter");
 import Watcher from "./shitaraba/watcher";
 
-async function main() {
-    let gitter = new Gitter(process.env.npm_package_config_gitterToken);
-    let room = await gitter.rooms.join("peca-dev/public");
+async function main(watchURL: string, roomPath: string) {
+    let gitter = new Gitter(process.env.GITTER_TOKEN);
+    let room = await gitter.rooms.join(roomPath);
     new Watcher(reses => {
         reses.forEach(x => {
-            room.send(
-                `${x.number} ：${x.name}：${x.date} ID:${x.id}\n`
-                + `${x.message.split("\n").map(z => `　${z}`).join("\n")}`);
+            let body = `${x.number} ：${x.name}：${x.date} ID:${x.id}\n`
+                + `${x.message.split("\n").map(z => `　${z}`).join("\n")}`;
+            room.send("```text\n" + body.replace(/```/g, "``‵") + "\n```");
         });
-    }).watch(process.env.npm_package_config_threadURL);
+    }).watch(watchURL);
 }
 
-main()
+main(process.argv[2], process.argv[3])
     .catch((e: any) => console.error(e.stack));
