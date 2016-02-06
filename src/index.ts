@@ -10,6 +10,9 @@ async function main(watchURL: string, roomPath: string) {
             let body = `${x.number} ：${x.name}：${x.date} ID:${x.id}\n`
                 + `${x.message.split("\n").map(z => `　${z}`).join("\n")}`;
             room.send("```text\n" + body.replace(/```/g, "``‵") + "\n```");
+            if (x.number === 1000) {
+                room.send("This thread has exceeded 1000. Since we can not write, please make a new thread.");
+            }
         });
     }).watch(watchURL);
 }
