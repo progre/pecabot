@@ -2,6 +2,8 @@ import {EventEmitter} from "events";
 import * as RequestStatic from "request";
 const request: typeof RequestStatic = require("request");
 const iconv = require("iconv-lite");
+import * as log4js from "log4js";
+const logger = log4js.getLogger();
 import parse from "./parse";
 import {Res} from "./parse";
 
@@ -25,10 +27,10 @@ export default class Watcher extends EventEmitter {
                                 super.emit("add", y);
                             }
                         })
-                        .catch((e: any) => console.error(e.stack)),
+                        .catch((e: any) => logger.error(e.stack != null ? e.stack : e)),
                     7 * 1000);
             })
-            .catch((e: any) => console.error(e.stack));
+            .catch((e: any) => logger.error(e.stack != null ? e.stack : e));
     }
 
     private request(baseURL: string, res: number) {
